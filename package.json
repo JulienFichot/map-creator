@@ -2,6 +2,7 @@
   "name": "map-creator",
   "version": "1.0.0",
   "private": true,
+  "main": "electron/main.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,8 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "electron:pack": "next build && electron-builder --win --x64"
   },
   "dependencies": {
     "@turf/turf": "^7.1.0",
@@ -28,10 +30,42 @@
     "@types/react-dom": "^19",
     "@vitest/coverage-v8": "^4.1.9",
     "autoprefixer": "^10.4.20",
+    "electron": "^42.4.1",
+    "electron-builder": "^26.15.3",
     "playwright": "^1.61.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5",
     "vitest": "^4.1.9"
+  },
+  "build": {
+    "appId": "fr.agencemoove.map-creator",
+    "productName": "Map Creator",
+    "asar": false,
+    "files": [
+      "electron/**/*",
+      ".next/**/*",
+      "app/**/*",
+      "lib/**/*",
+      "components/**/*",
+      "node_modules/**/*",
+      "next.config.ts",
+      "package.json",
+      "tsconfig.json",
+      "postcss.config.mjs",
+      "tailwind.config.ts"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }]
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "installerLanguages": ["fr_FR"]
+    }
   }
 }

@@ -28,6 +28,9 @@ index.html
 tsconfig.tsbuildinfo
 scripts/screenshots/
 
+# Electron build output
+release/
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts

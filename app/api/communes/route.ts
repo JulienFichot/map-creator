@@ -43,22 +43,21 @@ async function fetchViaGeoApiGouv(lat: number, lng: number, radiusKm: number): P
   const data: GeoApiCommune[] = await resp.json();
 
   const communes: Commune[] = data
-    .map((c) => {
+    .flatMap((c) => {
       const cLng = c.centre?.coordinates[0];
       const cLat = c.centre?.coordinates[1];
-      if (!cLat || !cLng) return null;
+      if (!cLat || !cLng) return [];
       const distance = haversineKm(lat, lng, cLat, cLng);
-      if (distance > radiusKm) return null;
-      return {
+      if (distance > radiusKm) return [];
+      return [{
         name: c.nom,
         postalCode: c.codesPostaux?.[0] ?? '',
         lat: cLat,
         lng: cLng,
         distance: Math.round(distance * 10) / 10,
         inseeCode: c.code,
-      };
+      }];
     })
-    .filter((c): c is Commune => c !== null)
     .sort((a, b) => a.distance - b.distance);
 
   return communes;
