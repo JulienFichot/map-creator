@@ -56,7 +56,7 @@
       "tailwind.config.ts"
     ],
     "directories": {
-      "output": "release"
+      "output": "."
     },
     "win": {
       "target": [{ "target": "nsis", "arch": ["x64"] }]
