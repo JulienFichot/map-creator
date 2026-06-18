@@ -53,9 +53,7 @@ app.whenReady().then(() => {
     resizable: false,
     backgroundColor: '#1e293b',
   })
-  splash.loadURL(
-    `data:text/html,<!DOCTYPE html><html><body style="background:%231e293b;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:Arial,sans-serif"><p style="color:%23f97316;font-size:22px;font-weight:700;margin:0 0 12px">Map Creator</p><p style="color:%2394a3b8;font-size:14px;margin:0">D%C3%A9marrage en cours...</p></body></html>`
-  )
+  splash.loadFile(path.join(__dirname, 'splash.html'))
 
   startServer(appDir)
 
