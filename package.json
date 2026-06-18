@@ -11,7 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "electron:pack": "next build && electron-builder --win --x64"
+    "electron:pack": "next build && electron-builder --win --x64 && node -e \"const fs=require('fs');['win-unpacked','builder-debug.yml','latest.yml'].forEach(f=>{try{fs.rmSync(f,{recursive:true,force:true})}catch(_){}});fs.readdirSync('.').filter(f=>f.endsWith('.blockmap')).forEach(f=>fs.unlinkSync(f))\""
   },
   "dependencies": {
     "@turf/turf": "^7.1.0",
@@ -65,6 +65,9 @@
       "oneClick": true,
       "perMachine": false,
       "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
       "installerLanguages": ["fr_FR"]
     }
   }
